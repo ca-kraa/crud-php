@@ -20,7 +20,9 @@ $result = mysqli_query($link, $query);
 <body>
     <div class="container mt-2">
         <h1 class="text-center">Data Buku</h1>
-        <a href="inputbuku.php">Input Data</a>
+        <div class="text-center">
+            <a href="inputbuku.php">Input Data</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
