@@ -5,6 +5,21 @@ include 'koneksi.php';
 $query = "SELECT * FROM buku";
 
 $result = mysqli_query($link, $query);
+
+if (isset($_GET['aksi'])) {
+    if ($_GET['aksi'] == 'delete') {
+        $id = $_GET['id'];
+        $query_delete = "DELETE FROM buku WHERE id = $id";
+        $result_delete = mysqli_query($link, $query_delete);
+
+        if ($result_delete) {
+            echo "Data telah dihapus.";
+        } else {
+            echo "Gagal menghapus data: " . mysqli_error($link);
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +46,7 @@ $result = mysqli_query($link, $query);
                     <th>Penulis</th>
                     <th>Penerbit</th>
                     <th>Tahun Terbit</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +59,7 @@ $result = mysqli_query($link, $query);
                     echo "<td>" . $row['penulis'] . "</td>";
                     echo "<td>" . $row['penerbit'] . "</td>";
                     echo "<td>" . $row['tahun_terbit'] . "</td>";
+                    echo "<td><a href='editbuku.php?id=" . $row['id'] . "'>Edit</a> | <a href='?aksi=delete&id=" . $row['id'] . "'>Delete</a></td>";
                     echo "</tr>";
                     $no++;
                 }
